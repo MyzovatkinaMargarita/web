@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Твоя профессия</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #5d5fef;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background-color: #5326db;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .header-div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 0 10px;
+        }
+
+        .header-div p {
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .header-div p:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========== COMMON STYLES ========== */
+        .container {
+            width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        section {
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 25px 20px;
+            background-color: #f0f0ff;
+        }
+
+        h1, h2 {
+            color: #5d5fef;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        b {
+            color: #5d5fef;
+        }
+
+        /* ========== SPECIFIC SECTIONS ========== */
+        .Glava {
+            background-color: #5d5fef;
+            text-align: center;
+            padding: 30px 20px;
+            margin: 20px 15px;
+            border-radius: 20px;
+        }
+
+        .Glava h1 {
+            padding: 0;
+            margin: 0;
+        }
+
+        .Infa, .informations, .Container, .Kontainer {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .It p {
+            color: #5d5fef;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .sfera, .perspective {
+            text-align: left;
+        }
+
+        .sfera p, .perspective p {
+            padding-left: 10px;
+            margin-bottom: 20px;
+            border-left: 3px solid #5d5fef;
+        }
+
+        /* ========== COMPANIES LIST ========== */
+        .d-i-v {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .d-i-v p {
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 5px;
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .li1 { background-color: rgba(165, 42, 42, 0.1); color: brown; }
+        .li2 { background-color: rgba(0, 0, 0, 0.1); color: black; }
+        .li3 { background-color: rgba(19, 154, 71, 0.1); color: rgb(19, 154, 71); }
+        .li4 { background-color: rgba(20, 77, 147, 0.1); color: rgb(20, 77, 147); }
+        .li5 { background-color: rgba(165, 42, 42, 0.1); color: brown; }
+        .li6 { background-color: rgba(35, 12, 139, 0.1); color: rgb(35, 12, 139); }
+        .li7 { background-color: rgba(37, 170, 99, 0.1); color: rgb(37, 170, 99); }
+
+        /* ========== DROPDOWN LIST ========== */
+        .list-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .toggle-btn {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #5326db;
+            color: #5326db;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(83, 38, 219, 0.2);
+        }
+
+        .hidden-list {
+            display: none;
+            background: white;
+            margin-top: 10px;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hidden-list ul {
+            list-style: none;
+        }
+
+        .hidden-list li {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hidden-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hidden-list li p {
+            color: #555;
+            font-size: 1rem;
+            margin-top: 8px;
+            padding-left: 10px;
+        }
+
+        /* ========== TEST SECTION ========== */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        #box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        #prog {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 2px solid #edf0f5;
+            border-radius: 12px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .btn:hover {
+            background: #f0f0ff;
+            border-color: #5d5fef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 95, 239, 0.2);
+        }
+
+        #start-btn {
+            background: #5d5fef;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        #start-btn:hover {
+            background: #4a4cd9;
+        }
+
+        /* ========== RESULTS ========== */
+        #res {
+            font-size: 1.8rem;
+            color: #5a029a;
+            font-weight: bold;
+            margin: 25px 0;
+            padding: 15px;
+            border-bottom: 3px solid #5d5fef;
+            display: inline-block;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footr {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footr p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+
+        /* ========== MEDIA QUERIES ========== */
+        
+        /* Мобильные устройства (до 768px) */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 20px 15px;
+                margin: 15px 10px;
+            }
+            
+            .Glava {
+                padding: 25px 15px;
+                margin: 15px 10px;
+            }
+            
+            .header-div {
+                gap: 10px;
+            }
+            
+            .header-div p {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .d-i-v p {
+                min-width: 120px;
+                font-size: 0.9rem;
+                padding: 8px 10px;
+            }
+            
+            .btn {
+                padding: 13px;
+                font-size: 0.95rem;
+            }
+            
+            #box {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            main {
+                padding: 20px 10px;
+            }
+            
+            .footr {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* Очень маленькие экраны (до 480px) */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            p, .It p {
+                font-size: 1rem;
+            }
+            
+            .header-div {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .header-div p {
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .d-i-v {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .d-i-v p {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .btn {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+            
+            #res {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+            
+            .hidden-list {
+                padding: 15px;
+            }
+            
+            .hidden-list li p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Большие экраны (от 1200px) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+            
+            section {
+                max-width: 1100px;
+            }
+        }
+        
+        /* Планшеты и маленькие ноутбуки (от 769px до 1199px) */
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .container {
+                max-width: 900px;
+            }
+            
+            section {
+                max-width: 850px;
+            }
+            
+            .d-i-v p {
+                min-width: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-div">
+        <p>Главная</p>
+        <p>Интересное об IT</p>
+        <p>Тест</p>
+        <p>Контакты</p>
+    </div>
+</header>
+
+<div class="Glava">
+    <h1>Как найти себя в сфере IT?</h1>
+</div>
+
+<div class="Infa section">
+    <h2>Вспомним, что такое IT</h2>
+</div>
+
+<div class="informations section">
+    <div class="It">
+        <p><b>Сфера информационных технологий (IT)</b> (от англ. Information Technology) — это область, которая охватывает все 
+            способы создания, хранения, обмена и использования информации в цифровом формате. Включает всё, что связано с 
+            обработкой, хранения и передачи информации с помощью компьютеров: интернет, программы, приложения, создание 
+            сайтов, облачных сервисов.</p>
+    </div>
+</div>
+
+<div class="sfera section">
+    <h2>Сферы применения IT-технологий</h2>
+    <p><b>Бизнес:</b> автоматизация бизнес-процессов, анализ данных, электронная коммерция.</p>
+    <p><b>Медицина:</b> автоматизация процессов учёта медицинской информации, управления медицинскими записями и документацией, внедрение новых методов диагностики и лечения.</p>
+    <p><b>Образование:</b> дистанционное обучение, интерактивные учебные материалы, электронные ресурсы.</p>
+    <p><b>Транспорт:</b> автоматизация систем управления движением и контроля безопасности, оптимизация логистических процессов.</p>
+    <p><b>Государственное управление:</b> автоматизация процессов учёта, регистрации и обработки информации, электронное взаимодействие с гражданами.</p>
+</div>
+
+<div class="perspective section">
+    <h2>Перспективы</h2>
+    <p><b>Искусственный интеллект:</b> будет использоваться повсеместно — от помощи в поиске информации до автоматизации бизнес-процессов.</p>
+    <p><b>Кибербезопасность:</b> компании будут активно инвестировать в защиту данных, развитие собственных центров мониторинга и найм специалистов, поскольку количество кибератак и регуляторные требования продолжают расти.</p>
+    <p><b>Edge-computing:</b> технология обработки данных не на центральных серверах, а непосредственно в устройствах или локальных узлах — позволяет уменьшить задержки и повысить безопасность.</p>
+</div>
+
+<div class="Container section">
+    <div class="kompany">
+        <h2>Крупнейшие IT-компании в России</h2>
+        <div class="d-i-v">
+            <p class="li1">Яндекс</p>
+            <p class="li2">Т-Банк</p>
+            <p class="li3">Сбер</p>
+            <p class="li4">ИТ-холдинг Т1</p>
+            <p class="li5">МТС</p>
+            <p class="li6">VK</p>
+            <p class="li7">Лаборатория Касперского</p>
+        </div>
+    </div>
+</div>
+
+<div class="Kontainer section">
+    <div class="intro-text">
+        <h2>Как понять, какая IT-профессия тебе подходит?</h2>
+        <p>Понять, какая профессия в IT подходит, можно с помощью профориентационных тестов. 
+            Они помогают проанализировать личные качества и определить, какие направления в сфере IT соответствуют типу личности.</p>
+        <p>Однако стоит учитывать, что профессиональный успех зависит и от других факторов, 
+            например, от актуального состояния рынка и востребованности выбранной профессии, мотивации к 
+            саморазвитию, дисциплины и наличия свободного времени.</p>
+    </div>
+
+    <div class="list-container">
+        <button class="toggle-btn" onclick="toggleMyList()">
+            Список IT-профессий <span id="arrow">▼</span>
+        </button>
+        
+        <div id="dropdownList" class="hidden-list">
+            <ul>
+                <li><b>Веб-разработчик</b> 
+                    <p>Создают сайты и веб-приложения, работают с фронтендом (интерфейсом) и бэкендом (серверной частью).</p>
+                </li>
+                <li><b>Аналитик данных</b> 
+                    <p>Работает с данными: собирает их из разных источников, очищает от лишнего, визуализирует и ищет закономерности.</p>
+                </li>
+                <li><b>Дизайнер</b>
+                    <p>Создаёт визуальную часть цифровых продуктов: сайты, приложения, рекламные материалы и анимацию.</p>
+                </li>
+                <li><b>Специалист по кибербезопасности</b>
+                    <p>Защищает компьютерные системы от кибератак.</p>
+                </li>
+                <li><b>DevOps-инженер</b>
+                    <p>Управляет серверами, базами данных, облачной инфраструктурой и сетями.</p>
+                </li>
+                <li><b>Тестировщик</b>
+                    <p>Выявляет ошибки и дефекты в программном обеспечении.</p>
+                </li>
+                <li><b>Системный администратор</b>
+                    <p>Проектирует, настраивает и поддерживает компьютерные системы.</p>
+                </li>
+                <li><b>Специалист по искусственному интеллекту</b>
+                    <p>Профессионал, который занимается разработкой, обучением, адаптацией и применением систем ИИ. Способен разработать и интегрировать эти технологии.</p>
+                </li>
+                <li><b>Project-менеджер</b>
+                    <p>Управляет проектами и контролирует всю команду, работает над планом и устанавливает сроки реализации каждого этапа, распределяет доступные ресурсы и бюджет, ставит задачи для каждого члена коллектива, решает проблемы и занимается управлением рисками.</p>
+                </li>
+                <li><b>Компьютерный лингвист</b>
+                    <p>Разрабатывает алгоритмы распознавания письменной и звучащей речи, которые используются при создании автоматических переводчиков и онлайн-словарей.</p>
+                </li>
+                <li><b>Разработчик программного обеспечения</b>
+                    <p>Занимается созданием программных решений для бизнеса.</p>
+                </li>
+                <li><b>Разработчик игр</b>
+                    <p>Специалист, который создаёт видеоигры для разных платформ: ПК, консолей, мобильных устройств.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<main>
+    <div id="box">
+        <!-- Начало -->
+        <div id="s-screen">
+            <h1>Узнай, какая IT-профессия тебе подходит</h1>
+            <button id="start-btn" class="btn" onclick="start()">Начать тест</button>
+        </div>
+
+        <!-- Вопросы -->
+        <div id="q-screen" style="display:none">
+            <span id="prog">Вопрос 1 из 11</span>
+            <h2 id="q-text">Вопрос</h2>
+            <div id="ans"></div>
+        </div>
+
+        <!-- Финал -->
+        <div id="f-screen" style="display:none">
+            <h2>Твой результат:</h2>
+            <div id="res"></div>
+            <button class="btn" onclick="location.reload()" style="background: #f0f0ff;">Пройти еще раз</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footr">
+        <p>Наш тг: professions_life</p>
+        <p>Наш вк: profes-sions_vk</p>
+    </div>
+</footer>
+
+<script>
+    const questions = [
+        { q: "Нравится ли тебе искать ошибки в кодах?", a: [{ t: "Да", k: "E" }, { t: "Нет", k: "0" }] },
+        { q: "Что из этого вам нравится?", a: [{ t: "Разрабатывать игры", k: "П" }, { t: "Работать с системами и данными", k: "Б" }, { t: "Работать с искусственным интеллектом", k: "К" }, { t: "Мотивировать и сплочать коллектив", k: "Л" }, { t: "Разрабатывать программные решения для бизнеса", k: "Н" }, { t: "Создавать дизайн приложений", k: "В" }, { t: "Разрабатывать приложения", k: "А" }, { t: "Ничего из этого", k: "0" }] },
+        { q: "Если бы вас позвали работать в крутую IT компанию, чем бы вы там занимались?", a: [{ t: "Разрабатывал бы меры безопасности, мониторил и обнаруживал бы угрозы", k: "Г" }, { t: "Управлял бы инфраструктурой и конфигурацией", k: "Д" }, { t: "Занимался бы резервным копированием и восстановлением данных", k: "З" }, { t: "Ничего из этого", k: "0" }] },
+        { q: "Нравится ли вам работать с иностранными языками?", a: [{ t: "Да", k: "М" }, { t: "Нет", k: "0" }] },
+        { q: "Если бы вас попросили помочь с организацией вечеринки, что бы вы делали?", a: [{ t: "Работали бы над списками приглашённых, корректировали бы план вечеринки", k: "Б" }, { t: "Рассчитали бы минимальную стоимость вечеринки, попытались бы сделать вечеринку для посетителей лучше, снизили бы риски", k: "Д" }, { t: "Украсили бы место проведения вечеринки, нарисовали бы приглашения на неё", k: "В" }, { t: "Были бы охранником, следили бы за порядком", k: "Г" }, { t: "Следили бы за тем, чтобы гостям было комфортно", k: "З" }, { t: "Адаптировали бы робота к будущей вечеринке, чтобы он работал за других людей", k: "К" }, { t: "Разработали бы игру для посетителей", k: "П" }, { t: "Придумывали бы способы улучшить вечеринку и сделать её более выгодной", k: "Н" }, { t: "Ничего из этого", k: "0" }] },
+        { q: "Если бы вам нужно было бы разработать приложение, чем вы бы занялись?", a: [{ t: "Написал бы код к приложению", k: "А" }, { t: "Протестировал бы приложение", k: "Е" }, { t: "Помогал бы команде морально, давал бы советы, поддерживал бы", k: "Л" }, { t: "Перевёл бы приложение на иностранные языки с помощью новой технологии", k: "М" }, { t: "Ничем из этого", k: "0" }] },
+        { q: "С чем из нижеперечисленного вам нравится работать?", a: [{ t: "С данными", k: "Б" }, { t: "Оценивать и анализировать уязвимости. Шифровать данные", k: "Г" }, { t: "С облачной инфраструктурой и сетями", k: "Д" }, { t: "С искусственным интеллектом", k: "К" }, { t: "Нравится разрабатывать алгоритмы распознавания речи", k: "М" }, { t: "Управлять сетью, оптимизировать производительность. Устанавливать обновления и патчи для операционных систем", k: "З" }, { t: "Ни с чем из этого", k: "0" }] },
+        { q: "С чем из нижеперечисленного вы бы связали свою жизнь?", a: [{ t: "С разработкой веб-приложений", k: "А" }, { t: "С созданием дизайна сайтов и приложений", k: "В" }, { t: "С тестированием программ и приложений", k: "Е" }, { t: "С наставничеством и управлением, сплочением коллектива", k: "Л" }, { t: "С разработкой программных решений для бизнеса", k: "Н" }, { t: "С созданием видеоигр", k: "П" }, { t: "Связал бы свою жизнь с другим", k: "0" }] },
+        { q: "Если бы ваша команда участвовала в конкурсе технологий, какую задачу вы бы взяли на себя?", a: [{ t: "Сделать яркую и красивую презентацию", k: "В" }, { t: "Отыскать информацию для вашего выступления, сделать её более понятной и информативной", k: "Б" }, { t: "Разработать мини-сайт вашего изобретения", k: "А" }, { t: "Протестировать ваше устройство, указать на ошибки", k: "Е" }, { t: "Настроить коллектив на нужный лад, выступить с вашей презентацией", k: "Л" }, { t: "Доработать изобретение так, чтобы оно распознавало речь", k: "М" }, { t: "Придумать, как ваше изобретение может помочь людям, продумать бизнес-план", k: "Н" }, { t: "Никакую", k: "0" }] },
+        { q: "Что из этого вам нравится больше?", a: [{ t: "Разработка и интеграция искусственного интеллекта", k: "К" }, { t: "Придумывать сюжеты для игр, воплощать их в реальность", k: "П" }, { t: "Предотвращать кибератаки", k: "Г" }, { t: "Ничего из этого", k: "0" }] },
+        { q: "Какие работы с сетями вам нравятся больше?", a: [{ t: "Управлять сетями, балансировать нагрузки", k: "Д" }, { t: "Настраивать и поддерживать компьютерные сети", k: "З" }, { t: "Мне не нравятся работы с сетями", k: "0" }] },
+    ];
+
+    const profs = {
+        "А": "Веб-разработчик", 
+        "Б": "Аналитик данных", 
+        "В": "Дизайнер",
+        "Г": "Специалист по кибербезопасности", 
+        "Д": "DevOps-инженер",
+        "Е": "Тестировщик", 
+        "З": "Системный администратор",
+        "К": "Специалист по ИИ", 
+        "Л": "Project-менеджер",
+        "М": "Компьютерный лингвист", 
+        "Н": "Разработчик ПО", 
+        "П": "Разработчик игр",
+    };
+
+    function toggleMyList() {
+        let list = document.getElementById("dropdownList");
+        let arrow = document.getElementById("arrow");
+        
+        if (list.style.display === "none" || list.style.display === "") {
+            list.style.display = "block";
+            arrow.innerText = "▲";
+        } else {
+            list.style.display = "none";
+            arrow.innerText = "▼";
+        }
+    }
+
+    let step = 0;
+    let score = [];
+
+    function start() {
+        document.getElementById('s-screen').style.display = 'none';
+        document.getElementById('q-screen').style.display = 'block';
+        showQ();
+    }
+
+    function showQ() {
+        if (step >= questions.length) {
+            finish();
+            return;
+        }
+        let curr = questions[step];
+        document.getElementById('prog').innerText = "Вопрос " + (step + 1) + " из " + questions.length;
+        document.getElementById('q-text').innerText = curr.q;
+        let ansDiv = document.getElementById('ans');
+        ansDiv.innerHTML = "";
+        curr.a.forEach(opt => {
+            let b = document.createElement('button');
+            b.className = "btn";
+            b.innerText = opt.t;
+            b.onclick = () => {
+                if (opt.k !== "0") score.push(opt.k);
+                step++;
+                showQ();
+            };
+            ansDiv.appendChild(b);
+        });
+    }
+
+    function finish() {
+        document.getElementById('q-screen').style.display = 'none';
+        document.getElementById('f-screen').style.display = 'block';
+        if (score.length === 0) {
+            document.getElementById('res').innerText = "IT-Универсал";
+            return;
+        }
+        let counts = {};
+        score.forEach(x => counts[x] = (counts[x] || 0) + 1);
+        let win = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+        document.getElementById('res').innerText = profs[win] || "IT-Специалист";
+    }
+</script>
+</body>
+</html>
